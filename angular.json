@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "memory-game"
+    }
+  },
+  "defaultProject": "memory-game",
+  "cli": {
+    "analytics": false
+  }
 }
