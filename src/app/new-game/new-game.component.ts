@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-game',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./new-game.component.scss']
 })
 export class NewGameComponent implements OnInit {
+  gameSize = 3;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+
+    ) { }
 
   ngOnInit(): void {
+  }
+
+  startNewGame() {
+    this.router.navigate(['/game']);
   }
 
 }
