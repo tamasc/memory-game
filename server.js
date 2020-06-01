@@ -24,7 +24,7 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 	db = client.db();
 	console.log("Database connection ready");
 
-	app.get('/highscores', function(req,res) {
+	app.get('/api/highscores', function(req,res) {
 		db.collection(HIGH_SCORES_COLLECTION).find({}).toArray((err, docs) => {
 			if (err) {
 				handleError(res, err.message, "Failed to get contacts.");
@@ -37,8 +37,9 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 	// Serve only the static files form the dist directory
 	app.use(express.static(__dirname + '/dist/memory-game'));
 
-	app.get('/*', function(req,res) {
-		res.sendFile(path.join(__dirname+'/dist/memory-game/index.html'));
+	app.get('/*', function(req, res) {
+		console.log(234234);
+		res.sendFile(path.join(__dirname + '/dist/memory-game/index.html'));
 	});
 
   // Initialize the app.

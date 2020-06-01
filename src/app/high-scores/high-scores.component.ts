@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HighScoresService } from '../high-scores.service';
+import { HighScore } from '../types/highscore.type';
 
 @Component({
   selector: 'app-high-scores',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./high-scores.component.scss']
 })
 export class HighScoresComponent implements OnInit {
+  highScores: HighScore[] = [];
 
-  constructor() { }
+  constructor(private highScoresService: HighScoresService) { }
 
   ngOnInit(): void {
+    this.highScoresService.get().subscribe(resp => this.highScores = resp);
   }
-
 }
