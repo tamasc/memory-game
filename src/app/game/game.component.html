@@ -1,5 +1,8 @@
-<div>
-    <div *ngFor="let card of cards">
-        <img [src]="'/assets/logos/' + card.name + '-logo.png'"/>
+<div class="card-table">
+    <div [ngClass]="{ 'card': true, 'is-flipped': card.isShown }" (click)="card.isShown = !card.isShown" *ngFor="let card of cards">
+        <div class="front">
+            <img [src]="'/assets/logos/' + card.name + '-logo.png'"/>
+        </div>
+        <div class="back"></div>
     </div>
 </div>

@@ -12,6 +12,7 @@ import { Card } from '../types/card.type';
 export class GameComponent implements OnInit {
 	public gameSize: number;
 	public cards: Card[] = [];
+	isFlipped = false;
 
 	constructor(private gameService: GameService) { }
 

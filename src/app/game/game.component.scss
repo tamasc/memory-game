@@ -1,0 +1,37 @@
+.card-table {
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    max-width: 1000px;
+    perspective: 1000px;
+    div.card {
+        flex: 0 0 150px;
+        height: 150px;
+        border: 1px solid black;
+        transition: transform 1s;
+        transform-style: preserve-3d;
+        & > div {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            backface-visibility: hidden;
+        }
+        div.back {
+            top: 0;
+            background-color: blue;
+        }
+        div.front {
+            display: flex;
+            align-items: center;
+            background-color: orange;
+            transform: rotateY(180deg);
+
+        }
+        div.front > img {
+            width: 100%;
+        }
+    }
+    div.card.is-flipped {
+        transform: rotateY(180deg);
+    }
+}
