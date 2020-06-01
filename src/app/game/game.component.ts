@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
 
 import logoNames from './game.logos';
+import { Card } from '../types/card.type';
 
 @Component({
 	selector: 'app-game',
@@ -10,6 +11,7 @@ import logoNames from './game.logos';
 })
 export class GameComponent implements OnInit {
 	public gameSize: number;
+	public cards: Card[] = [];
 
 	constructor(private gameService: GameService) { }
 
@@ -17,6 +19,12 @@ export class GameComponent implements OnInit {
 		this.gameSize = this.gameService.gameSize;
 		const deck = this.getRandomCards(logoNames, this.gameSize);
 		const shuffledCardPairsDeck = this.shuffleCards([...deck, ...deck]);
+		this.cards = shuffledCardPairsDeck.map((cardName, index) => ({
+			id: index,
+			name: cardName,
+			isFound: false,
+			isShown: false,
+		}));
 	}
 
 	// stackoverflow

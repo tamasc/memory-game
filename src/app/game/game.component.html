@@ -1,1 +1,5 @@
-<p>game works!</p>
+<div>
+    <div *ngFor="let card of cards">
+        <img [src]="'/assets/logos/' + card.name + '-logo.png'"/>
+    </div>
+</div>
