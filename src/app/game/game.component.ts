@@ -12,7 +12,8 @@ import { Card } from '../types/card.type';
 export class GameComponent implements OnInit {
 	public gameSize: number;
 	public cards: Card[] = [];
-	isFlipped = false;
+	private firstFlippedCard: null | Card = null;
+	private flipAllTimeoutId: any = null;
 
 	constructor(private gameService: GameService) { }
 
@@ -24,7 +25,7 @@ export class GameComponent implements OnInit {
 			id: index,
 			name: cardName,
 			isFound: false,
-			isShown: false,
+			isFlipped: false,
 		}));
 	}
 
@@ -51,5 +52,45 @@ export class GameComponent implements OnInit {
 			array[j] = temp;
 		}
 		return array;
+	}
+
+	private unFlipAllCards() {
+		clearTimeout(this.flipAllTimeoutId);
+		this.flipAllTimeoutId = null;
+		this.firstFlippedCard = null;
+		this.cards.forEach(cardElem => cardElem.isFlipped = false);
+		console.log(this.cards);
+	}
+
+	public flip(card: Card) {
+		// 1. case: card is found
+		if (card.isFound) {
+			return;
+		}
+		// 4. case: previously no pairs found but cards are still shown (setTimeout)
+		if (this.flipAllTimeoutId) {
+			this.firstFlippedCard = null;
+			this.unFlipAllCards();
+		}
+		// 2. case: first flip
+		if (!this.firstFlippedCard) {
+			this.firstFlippedCard = card;
+			card.isFlipped = true;
+			return;
+		}
+		// 3. case: second flip
+		if (this.firstFlippedCard && this.firstFlippedCard.name === card.name) {
+			// 3.1 case: a pair is found
+			this.firstFlippedCard.isFound = true;
+			card.isFound = true;
+			this.firstFlippedCard = null;
+			this.unFlipAllCards();
+			return;
+		} else if (this.firstFlippedCard && this.firstFlippedCard.name !== card.name) {
+			// 3.2 case: no pairs found (need to show the card fow a while)
+			card.isFlipped = true;
+			this.firstFlippedCard = null;
+			this.flipAllTimeoutId = setTimeout(this.unFlipAllCards.bind(this), 2000);
+		}
 	}
 }

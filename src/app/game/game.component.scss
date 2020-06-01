@@ -8,7 +8,7 @@
         flex: 0 0 150px;
         height: 150px;
         border: 1px solid black;
-        transition: transform 1s;
+        transition: transform 0.3s;
         transform-style: preserve-3d;
         & > div {
             position: absolute;
@@ -30,6 +30,9 @@
         div.front > img {
             width: 100%;
         }
+    }
+    div.card.found > .front {
+        background-color: green;
     }
     div.card.is-flipped {
         transform: rotateY(180deg);

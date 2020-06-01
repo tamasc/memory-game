@@ -2,5 +2,5 @@ export interface Card {
 	id: number;
 	name: string;
 	isFound: boolean;
-	isShown: boolean;
+	isFlipped: boolean;
 }
