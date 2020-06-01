@@ -5,22 +5,22 @@ import { GameService } from '../game.service';
 @Component({
   selector: 'app-new-game',
   templateUrl: './new-game.component.html',
-  styleUrls: ['./new-game.component.scss']
+  styleUrls: ['./new-game.component.scss'],
 })
 export class NewGameComponent implements OnInit {
-  gameSize: number;
+  public gameSize: number;
 
   constructor(
-    private router: Router,
-    private gameService: GameService,
-    ) { }
+	private router: Router,
+	private gameService: GameService,
+	) { }
 
-  ngOnInit(): void {
-    this.gameSize = this.gameService.gameSize;
+  public ngOnInit(): void {
+	this.gameSize = this.gameService.gameSize;
   }
 
-  startNewGame() {
-    this.gameService.gameSize = this.gameSize;
-    this.router.navigate(['/game']);
+  public startNewGame() {
+	this.gameService.gameSize = this.gameSize;
+	this.router.navigate(['/game']);
   }
 }

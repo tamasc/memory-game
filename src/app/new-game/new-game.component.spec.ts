@@ -7,19 +7,19 @@ describe('NewGameComponent', () => {
   let fixture: ComponentFixture<NewGameComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ NewGameComponent ]
-    })
-    .compileComponents();
+	TestBed.configureTestingModule({
+		declarations: [ NewGameComponent ],
+	})
+	.compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewGameComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+	fixture = TestBed.createComponent(NewGameComponent);
+	component = fixture.componentInstance;
+	fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+	expect(component).toBeTruthy();
   });
 });

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -7,14 +7,14 @@ import { catchError, retry } from 'rxjs/operators';
 import { HighScore } from './types/highscore.type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HighScoresService {
   private highscoresUrl = '/api/highscores';
 
   constructor(private http: HttpClient) { }
 
-  get() {
-    return this.http.get<HighScore[]>(this.highscoresUrl);
+  public get() {
+	return this.http.get<HighScore[]>(this.highscoresUrl);
   }
 }

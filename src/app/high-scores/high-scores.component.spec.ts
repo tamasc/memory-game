@@ -7,19 +7,19 @@ describe('HighScoresComponent', () => {
   let fixture: ComponentFixture<HighScoresComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ HighScoresComponent ]
-    })
-    .compileComponents();
+	TestBed.configureTestingModule({
+		declarations: [ HighScoresComponent ],
+	})
+	.compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HighScoresComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+	fixture = TestBed.createComponent(HighScoresComponent);
+	component = fixture.componentInstance;
+	fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+	expect(component).toBeTruthy();
   });
 });

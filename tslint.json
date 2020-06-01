@@ -36,7 +36,8 @@
     "import-spacing": true,
     "indent": {
       "options": [
-        "spaces"
+        "tabs",
+        4
       ]
     },
     "max-classes-per-file": false,
@@ -145,10 +146,5 @@
   },
   "rulesDirectory": [
     "codelyzer"
-  ],
-  "indent": [
-    true,
-    "tabs",
-    4
   ]
 }

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GameService {
   private _gameSize = 3;
 
   get gameSize() {
-    return this._gameSize;
+	return this._gameSize;
   }
 
   set gameSize(size: number) {
-    this._gameSize = size;
+	this._gameSize = size;
   }
 
   constructor() { }

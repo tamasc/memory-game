@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { HighScoresComponent } from './high-scores/high-scores.component';
+import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './game/game.component';
+import { HighScoresComponent } from './high-scores/high-scores.component';
 import { NewGameComponent } from './new-game/new-game.component';
-
 
 const routes: Routes = [
   { path: 'highscores', component: HighScoresComponent },
@@ -13,6 +12,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }
