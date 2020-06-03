@@ -6,6 +6,9 @@ const bodyParser = require('body-parser');
 const mongodb = require('mongodb');
 const ObjectID = mongodb.ObjectID;
 
+const sanitize = require('mongo-sanitize'); // sanitize(req.params.username);
+const sanitizeHtml = require('sanitize-html'); //  sanitizeHtml(dirty);
+
 const HIGH_SCORES_COLLECTION = 'highscores';
 
 const app = express();

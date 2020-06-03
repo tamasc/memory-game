@@ -15,6 +15,7 @@ import { HighScoresComponent } from './high-scores/high-scores.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NewGameComponent } from './new-game/new-game.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { GameWonDialogComponent } from './game-won-dialog/game-won-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 	GameComponent,
 	NavBarComponent,
 	NewGameComponent,
+	GameWonDialogComponent,
   ],
   imports: [
 	BrowserModule,

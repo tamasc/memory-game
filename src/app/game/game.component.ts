@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from '../game.service';
+import { getTimeFromTimestamp } from '../utils/helpers';
 
 import logoNames from './game.logos';
 import { Card } from '../types/card.type';
+import { MatDialog } from '@angular/material/dialog';
+import { GameWonDialogComponent } from '../game-won-dialog/game-won-dialog.component';
+import GameData from '../types/gameData.type';
 
 @Component({
 	selector: 'app-game',
@@ -13,13 +17,18 @@ export class GameComponent implements OnInit {
 	public gameSize: number;
 	public cards: Card[] = [];
 	public gameTime = '0 : 0';
+	private gameTimeStamp: number;
 	public steps = 0;
 	private gameStartTimeStamp: number;
 	private firstFlippedCard: null | Card = null;
 	private flipAllTimeoutId: any = null;
 	private gameTimeInterval: any;
+	private foundPairs = 0;
 
-	constructor(private gameService: GameService) { }
+	constructor(
+		private gameService: GameService,
+		public dialog: MatDialog,
+	) { }
 
 	public ngOnInit(): void {
 		this.gameSize = this.gameService.gameSize;
@@ -36,6 +45,7 @@ export class GameComponent implements OnInit {
 
 	private startNewGame(): void {
 		clearInterval(this.gameTimeInterval);
+		this.foundPairs = 0;
 		this.gameStartTimeStamp = (new Date()).getTime();
 		this.gameTimeInterval = setInterval(() => {
 			this.updateTime();
@@ -45,8 +55,8 @@ export class GameComponent implements OnInit {
 
 	private updateTime() {
 		const currentTimeStamp = (new Date()).getTime();
-		const gameTimeDate = new Date(currentTimeStamp - this.gameStartTimeStamp);
-		this.gameTime = `${gameTimeDate.getMinutes()} : ${gameTimeDate.getSeconds()}`;
+		this.gameTimeStamp = currentTimeStamp - this.gameStartTimeStamp;
+		this.gameTime = getTimeFromTimestamp(this.gameTimeStamp);
 	}
 
 	// stackoverflow
@@ -106,6 +116,11 @@ export class GameComponent implements OnInit {
 			this.firstFlippedCard = null;
 			this.unFlipAllCards();
 			this.steps++;
+			this.foundPairs++;
+			if (this.foundPairs === this.gameSize) {
+				clearInterval(this.gameTimeInterval);
+				this.wonTheGame();
+			}
 			return;
 		} else if (this.firstFlippedCard && this.firstFlippedCard.name !== card.name) {
 			// 3.2 case: no pairs found (need to show the card fow a while)
@@ -114,5 +129,19 @@ export class GameComponent implements OnInit {
 			this.flipAllTimeoutId = setTimeout(this.unFlipAllCards.bind(this), 2000);
 			this.steps++;
 		}
+	}
+
+	private wonTheGame() {
+		const dialogRef = this.dialog.open(GameWonDialogComponent, {
+			width: '250px',
+			data: {
+				time: this.gameTimeStamp,
+				steps: this.steps,
+			},
+		});
+
+		dialogRef.afterClosed().subscribe((result: GameData) => {
+			console.log(result);
+		});
 	}
 }
