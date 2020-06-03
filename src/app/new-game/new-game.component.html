@@ -1,5 +1,7 @@
 <div>
-	<label for="size">Enter game size</label>
-	<input name="size"  type="number" min="3" max="18" [(ngModel)]="gameSize">
-	<button (click)="startNewGame()">Start new game</button>
+	<mat-form-field>
+		<mat-label>Enter game size</mat-label>
+		<input matInput name="size"  type="number" min="3" max="18" [(ngModel)]="gameSize">
+	</mat-form-field>
+	<button mat-raised-button color="accent" (click)="startNewGame()">Start new game</button>
 </div>
