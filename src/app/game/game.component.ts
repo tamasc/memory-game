@@ -12,8 +12,12 @@ import { Card } from '../types/card.type';
 export class GameComponent implements OnInit {
 	public gameSize: number;
 	public cards: Card[] = [];
+	public gameTime = '0 : 0';
+	public steps = 0;
+	private gameStartTimeStamp: number;
 	private firstFlippedCard: null | Card = null;
 	private flipAllTimeoutId: any = null;
+	private gameTimeInterval: any;
 
 	constructor(private gameService: GameService) { }
 
@@ -27,6 +31,22 @@ export class GameComponent implements OnInit {
 			isFound: false,
 			isFlipped: false,
 		}));
+		this.startNewGame();
+	}
+
+	private startNewGame(): void {
+		clearInterval(this.gameTimeInterval);
+		this.gameStartTimeStamp = (new Date()).getTime();
+		this.gameTimeInterval = setInterval(() => {
+			this.updateTime();
+		}, 1000);
+		this.steps = 0;
+	}
+
+	private updateTime() {
+		const currentTimeStamp = (new Date()).getTime();
+		const gameTimeDate = new Date(currentTimeStamp - this.gameStartTimeStamp);
+		this.gameTime = `${gameTimeDate.getMinutes()} : ${gameTimeDate.getSeconds()}`;
 	}
 
 	// stackoverflow
@@ -64,7 +84,7 @@ export class GameComponent implements OnInit {
 
 	public flip(card: Card) {
 		// 1. case: card is found
-		if (card.isFound) {
+		if (card.isFound || card.isFlipped) {
 			return;
 		}
 		// 4. case: previously no pairs found but cards are still shown (setTimeout)
@@ -85,12 +105,14 @@ export class GameComponent implements OnInit {
 			card.isFound = true;
 			this.firstFlippedCard = null;
 			this.unFlipAllCards();
+			this.steps++;
 			return;
 		} else if (this.firstFlippedCard && this.firstFlippedCard.name !== card.name) {
 			// 3.2 case: no pairs found (need to show the card fow a while)
 			card.isFlipped = true;
 			this.firstFlippedCard = null;
 			this.flipAllTimeoutId = setTimeout(this.unFlipAllCards.bind(this), 2000);
+			this.steps++;
 		}
 	}
 }

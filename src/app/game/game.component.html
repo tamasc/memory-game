@@ -1,3 +1,7 @@
+<div class="status">
+    <div>{{gameTime}}</div>
+    <div>{{steps}}</div>
+</div>
 <div class="card-table">
     <div [ngClass]="{ 'card': true, 'is-flipped': card.isFound || card.isFlipped, 'found': card.isFound }" (click)="flip(card)" *ngFor="let card of cards">
         <div class="front">
