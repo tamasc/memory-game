@@ -7,14 +7,18 @@ import { catchError, retry } from 'rxjs/operators';
 import { HighScore } from './types/highscore.type';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class HighScoresService {
-  private highscoresUrl = '/api/highscores';
+	private highscoresUrl = '/api/highscores';
 
-  constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient) { }
 
-  public get() {
-	return this.http.get<HighScore[]>(this.highscoresUrl);
-  }
+	public get() {
+		return this.http.get<HighScore[]>(this.highscoresUrl);
+	}
+
+	save(result: HighScore): void {
+		this.http.put<HighScore>(this.highscoresUrl, result).subscribe();
+	}
 }

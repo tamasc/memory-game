@@ -6,7 +6,8 @@ import logoNames from './game.logos';
 import { Card } from '../types/card.type';
 import { MatDialog } from '@angular/material/dialog';
 import { GameWonDialogComponent } from '../game-won-dialog/game-won-dialog.component';
-import GameData from '../types/gameData.type';
+import { HighScore } from '../types/highscore.type';
+import { HighScoresService } from '../high-scores.service';
 
 @Component({
 	selector: 'app-game',
@@ -27,6 +28,7 @@ export class GameComponent implements OnInit {
 
 	constructor(
 		private gameService: GameService,
+		private highScoresService: HighScoresService,
 		public dialog: MatDialog,
 	) { }
 
@@ -140,8 +142,8 @@ export class GameComponent implements OnInit {
 			},
 		});
 
-		dialogRef.afterClosed().subscribe((result: GameData) => {
-			console.log(result);
+		dialogRef.afterClosed().subscribe((result: HighScore) => {
+			this.highScoresService.save(result);
 		});
 	}
 }

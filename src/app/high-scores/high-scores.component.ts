@@ -13,6 +13,6 @@ export class HighScoresComponent implements OnInit {
   constructor(private highScoresService: HighScoresService) { }
 
   public ngOnInit(): void {
-	this.highScoresService.get().subscribe((resp) => this.highScores = resp);
+	  this.highScoresService.get().subscribe((resp) => this.highScores = resp);
   }
 }
