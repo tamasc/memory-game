@@ -4,15 +4,23 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class GameService {
-  private _gameSize = 18;
+	private _gameSize = 18;
 
-  get gameSize() {
-	return this._gameSize;
-  }
+	get gameSize() {
+		return this._gameSize;
+	}
 
-  set gameSize(size: number) {
-	this._gameSize = size;
-  }
+	set gameSize(size: number) {
+		this._gameSize = size;
+	}
 
-  constructor() { }
+	set name(name: string) {
+		window.localStorage.setItem('szte-memory-game-name', name);
+	}
+
+	get name(): string {
+		return window.localStorage.getItem('szte-memory-game-name');
+	}
+
+	constructor() { }
 }
