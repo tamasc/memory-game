@@ -137,6 +137,7 @@ export class GameComponent implements OnInit {
 		const dialogRef = this.dialog.open(GameWonDialogComponent, {
 			width: '250px',
 			data: {
+				name: this.gameService.name,
 				time: this.gameTimeStamp,
 				steps: this.steps,
 			},

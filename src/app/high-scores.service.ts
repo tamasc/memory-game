@@ -1,8 +1,5 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 import { HighScore } from './types/highscore.type';
 
@@ -19,6 +16,8 @@ export class HighScoresService {
 	}
 
 	save(result: HighScore): void {
-		this.http.put<HighScore>(this.highscoresUrl, result).subscribe();
+		this.http.post<HighScore>(this.highscoresUrl, JSON.stringify(result), {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+		}).subscribe();
 	}
 }
