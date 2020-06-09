@@ -1,12 +1,15 @@
-<div class="status">
-    <div>{{gameTime}}</div>
-    <div>{{steps}}</div>
-</div>
 <div class="card-table">
     <div [ngClass]="{ 'card': true, 'is-flipped': card.isFound || card.isFlipped, 'found': card.isFound }" (click)="flip(card)" *ngFor="let card of cards">
         <div class="front">
             <img [src]="'/assets/logos/' + card.name + '-logo.png'"/>
         </div>
         <div class="back"></div>
+    </div>
+</div>
+<div class="status">
+    <div class="game-size">Game size (pairs): <span>{{gameSize}}</span></div>
+    <div class="current-status">
+        <div>Time: <span>{{gameTime}}</span></div>
+        <div>Steps: <span>{{steps}}</span></div>
     </div>
 </div>

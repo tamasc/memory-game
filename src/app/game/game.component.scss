@@ -1,7 +1,17 @@
+:host {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 .card-table {
     display: flex;
+    flex: 1 1;
     flex-wrap: wrap;
+    justify-content: center;
     margin: auto;
+    width: 100%;
     max-width: 1000px;
     perspective: 1000px;
     div.card {
@@ -18,12 +28,12 @@
         }
         div.back {
             top: 0;
-            background-color: blue;
+            background-color:	#01819e;
         }
         div.front {
             display: flex;
             align-items: center;
-            background-color: orange;
+            background-color:	#d5aa74;
             transform: rotateY(180deg);
 
         }
@@ -32,9 +42,29 @@
         }
     }
     div.card.found > .front {
-        background-color: green;
+        background-color: #017244;
     }
     div.card.is-flipped {
         transform: rotateY(180deg);
+    }
+}
+
+.status {
+    flex: 0 0 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #FFFFDA;
+    div {
+        margin: 30px 10px;
+        font-weight: 500;
+        font-size: 25px;
+    }
+    .current-status {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100%;
     }
 }

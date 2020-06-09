@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -36,12 +37,14 @@ import { GameWonDialogComponent } from './game-won-dialog/game-won-dialog.compon
 	MatInputModule,
 	MatDialogModule,
 	MatToolbarModule,
+	MatListModule,
   ],
   exports: [
 	MatButtonModule,
 	MatInputModule,
 	MatDialogModule,
 	MatToolbarModule,
+	MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
