@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 import { HighScore } from './types/highscore.type';
 
@@ -7,7 +8,7 @@ import { HighScore } from './types/highscore.type';
 	providedIn: 'root',
 })
 export class HighScoresService {
-	private highscoresUrl = '/api/highscores';
+	private highscoresUrl = environment.production ? '/api/highscores' : 'http://localhost:8080/api/highscores';
 
 	constructor(private http: HttpClient) { }
 
@@ -17,7 +18,7 @@ export class HighScoresService {
 
 	save(result: HighScore): void {
 		this.http.post<HighScore>(this.highscoresUrl, JSON.stringify(result), {
-			headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+			headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
 		}).subscribe();
 	}
 }
