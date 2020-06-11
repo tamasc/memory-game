@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HighScoresService } from '../high-scores.service';
 import { HighScore } from '../types/highscore.type';
+import { getTimeFromTimestamp } from '../utils/helpers';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -9,7 +10,7 @@ import { map } from 'rxjs/operators';
 	styleUrls: ['./high-scores.component.scss'],
 })
 export class HighScoresComponent implements OnInit {
-	public highScores: {gameSize: string, highScores: HighScore[]}[];
+	public highScores: any;
 
 	constructor(private highScoresService: HighScoresService) { }
 
@@ -28,8 +29,8 @@ export class HighScoresComponent implements OnInit {
 				}),
 				map((scoresByGameSize): {[key: string]: HighScore[]} => { // sort
 					Object.values(scoresByGameSize).forEach(scoreArray => {
-						scoreArray.sort((a, b) => b.time - a.time);
-						scoreArray.sort((a, b) => b.steps - a.steps);
+						scoreArray.sort((a: any, b: any) => b.time - a.time);
+						scoreArray.sort((a: any, b: any) => b.steps - a.steps);
 					});
 					return scoresByGameSize;
 				}),
@@ -40,6 +41,15 @@ export class HighScoresComponent implements OnInit {
 							highScores: value,
 						};
 					});
+				}),
+				map((scoresByGameSize): {gameSize: string, highScores: HighScore[]}[] => {
+					scoresByGameSize.forEach(scoreByGame => {
+						scoreByGame.highScores.forEach((score, index) => {
+							score['#'] = index + 1;
+							score.time = getTimeFromTimestamp(score.time);
+						});
+					});
+					return scoresByGameSize;
 				}),
 			)
 			.subscribe((resp) => this.highScores = resp);

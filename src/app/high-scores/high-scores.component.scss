@@ -1,0 +1,21 @@
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+    .score-container {
+        width: 100%;
+        height: 100%;
+        h2 {
+            margin-top: 25px;
+        }
+        table {
+            width: 100%;
+        }
+    }
+
+    .side {
+        flex: 0 0 300px;
+        background-color: #FFF7C1;
+    }
+}

@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +41,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 	MatDialogModule,
 	MatToolbarModule,
 	MatListModule,
+	MatTableModule,
   ],
   exports: [
 	MatButtonModule,
@@ -47,6 +49,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 	MatDialogModule,
 	MatToolbarModule,
 	MatListModule,
+	MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
