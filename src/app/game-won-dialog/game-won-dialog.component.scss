@@ -1,0 +1,24 @@
+.container {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    button {
+        color: #EEE;
+        background-color: #017244;
+    }
+    h1 {
+        text-align: center;
+        font-size: 35px;
+    }
+    div {
+        margin: 5px 0;
+        font-size: 18px;
+    }
+    h1, div {
+        font-weight: 400;
+    }
+    mat-form-field {
+        margin: 20px 0;
+    }
+}
