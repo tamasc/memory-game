@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 import { HighScore } from './types/highscore.type';
+import { pipe } from 'rxjs';
+import { take } from 'rxjs/internal/operators/take';
 
 @Injectable({
 	providedIn: 'root',
@@ -19,6 +21,10 @@ export class HighScoresService {
 	save(result: HighScore): void {
 		this.http.post<HighScore>(this.highscoresUrl, JSON.stringify(result), {
 			headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }),
-		}).subscribe();
+		})
+		.pipe(
+			take(1),
+		)
+		.subscribe();
 	}
 }

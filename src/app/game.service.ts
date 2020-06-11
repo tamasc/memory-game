@@ -19,7 +19,7 @@ export class GameService {
 	}
 
 	get name(): string {
-		return window.localStorage.getItem('szte-memory-game-name');
+		return window.localStorage.getItem('szte-memory-game-name') || 'player';
 	}
 
 	constructor() { }
