@@ -44,12 +44,12 @@ mongodb.MongoClient.connect(process.env.MONGODB_URI || "mongodb://localhost:2701
 
 	app.post('/api/highscores', function(req, res, next) {
 		try {
-			let { name, time, steps } = req.body;
+			let { name, time, steps, gameSize } = req.body;
 			name = sanitizeMongoParam(sanitizeHtml(name));
-			if (typeof name !== 'string' || !Number.isInteger(time) || !Number.isInteger(steps)) {
+			if (typeof name !== 'string' || !Number.isInteger(time) || !Number.isInteger(steps) || !Number.isInteger(gameSize)) {
 				throw new Error('There is a some kine of error with the request body!');
 			}
-			db.collection(HIGH_SCORES_COLLECTION).insertOne({ name, time, steps });
+			db.collection(HIGH_SCORES_COLLECTION).insertOne({ name, time, steps, gameSize });
 			res.status(200);
 		} catch (error) {
 			next(error);
