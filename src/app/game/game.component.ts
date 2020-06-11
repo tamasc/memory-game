@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { GameWonDialogComponent } from '../game-won-dialog/game-won-dialog.component';
 import { HighScore } from '../types/highscore.type';
 import { HighScoresService } from '../high-scores.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-game',
@@ -18,7 +19,7 @@ export class GameComponent implements OnInit {
 	public gameSize: number;
 	public cards: Card[] = [];
 	public gameTime = '0 : 0';
-	private gameTimeStamp: number;
+	private gameTimeStamp = 0;
 	public steps = 0;
 	private gameStartTimeStamp: number;
 	private firstFlippedCard: null | Card = null;
@@ -29,7 +30,8 @@ export class GameComponent implements OnInit {
 	constructor(
 		private gameService: GameService,
 		private highScoresService: HighScoresService,
-		public dialog: MatDialog,
+		private dialog: MatDialog,
+		private router: Router,
 	) { }
 
 	public ngOnInit(): void {
@@ -135,16 +137,19 @@ export class GameComponent implements OnInit {
 
 	private wonTheGame() {
 		const dialogRef = this.dialog.open(GameWonDialogComponent, {
-			width: '250px',
+			width: '450px',
 			data: {
 				name: this.gameService.name,
 				time: this.gameTimeStamp,
 				steps: this.steps,
+				gameSize: this.gameSize,
 			},
 		});
 
 		dialogRef.afterClosed().subscribe((result: HighScore) => {
+			this.gameService.name = result.name;
 			this.highScoresService.save(result);
+			this.router.navigate(['/new-game']);
 		});
 	}
 }
