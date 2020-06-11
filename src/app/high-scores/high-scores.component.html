@@ -1,1 +1,12 @@
-<div>{{ highScores | json }}</div>
+<div>
+    <div *ngFor="let scoresByGame of highScores">
+        <h2>
+            Gamesize: {{ scoresByGame.gameSize }}
+        </h2>
+        <div *ngFor="let score of scoresByGame.highScores">
+            <div>{{ score.name }}</div>
+            <div>{{ score.steps }}</div>
+            <div>{{ score.time }}</div>
+        </div>
+    </div>
+</div>

@@ -9,15 +9,15 @@ import { map } from 'rxjs/operators';
 	styleUrls: ['./high-scores.component.scss'],
 })
 export class HighScoresComponent implements OnInit {
-	public highScores: any;
+	public highScores: {gameSize: string, highScores: HighScore[]}[];
 
 	constructor(private highScoresService: HighScoresService) { }
 
 	public ngOnInit(): void {
 		this.highScoresService.get()
 			.pipe(
-				map(highScores => {
-					const scoresByGameSize = highScores.reduce((acc, score) => {
+				map((highScores): {[key: string]: HighScore[]} => { // collect by gameSize
+					return highScores.reduce((acc, score) => {
 						const { gameSize } = score;
 						if (!acc[gameSize]) {
 							acc[gameSize] = [];
@@ -25,8 +25,21 @@ export class HighScoresComponent implements OnInit {
 						acc[gameSize] = [...acc[gameSize], score];
 						return acc;
 					}, {});
-					console.log(scoresByGameSize);
+				}),
+				map((scoresByGameSize): {[key: string]: HighScore[]} => { // sort
+					Object.values(scoresByGameSize).forEach(scoreArray => {
+						scoreArray.sort((a, b) => b.time - a.time);
+						scoreArray.sort((a, b) => b.steps - a.steps);
+					});
 					return scoresByGameSize;
+				}),
+				map((scoresByGameSize): {gameSize: string, highScores: HighScore[]}[] => { // create array from the object
+					return Object.entries(scoresByGameSize).map(([key, value]) => {
+						return {
+							gameSize: key,
+							highScores: value,
+						};
+					});
 				}),
 			)
 			.subscribe((resp) => this.highScores = resp);
