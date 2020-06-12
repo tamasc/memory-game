@@ -29,7 +29,7 @@ export class HighScoresComponent implements OnInit {
 				}),
 				map((scoresByGameSize): {[key: string]: HighScore[]} => { // sort
 					Object.values(scoresByGameSize).forEach(scoreArray => {
-						scoreArray.sort((a: any, b: any) => b.time - a.time);
+						scoreArray.sort((a: any, b: any) => a.time - b.time);
 						scoreArray.sort((a: any, b: any) => a.steps - b.steps);
 					});
 					return scoresByGameSize;
